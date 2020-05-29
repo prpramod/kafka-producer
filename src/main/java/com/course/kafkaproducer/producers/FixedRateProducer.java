@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
-@Service
+// @Service
 public class FixedRateProducer {
 
     private int counter=0;
@@ -23,10 +23,10 @@ public class FixedRateProducer {
     }
 
 
-    @Scheduled(fixedRate = 1000)
+  //  @Scheduled(fixedRate = 1000)
     public void sendMessage(){
         counter++;
         log.info("Counter is:"+counter);
-        kafkaTemplate.send("t-fixedrate","Fixed Rate"+counter);
+        kafkaTemplate.send("t-fixedrate-2","Fixed Rate "+counter);
     }
 }
