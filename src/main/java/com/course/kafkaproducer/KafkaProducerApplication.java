@@ -1,5 +1,7 @@
 package com.course.kafkaproducer;
 
+import com.course.kafkaproducer.entity.Employee;
+import com.course.kafkaproducer.producers.EmployeeJsonProducer;
 import com.course.kafkaproducer.producers.HelloKafkaProducer;
 import com.course.kafkaproducer.producers.KafkaKeyProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 // @EnableScheduling
 public class KafkaProducerApplication implements CommandLineRunner {
 
     @Autowired
-    private KafkaKeyProducer kafkaKeyProducer;
+
+     private EmployeeJsonProducer employeeJsonProducer;
+    //private KafkaKeyProducer kafkaKeyProducer;
    // HelloKafkaProducer helloKafkaProducer;
 
     public static void main(String[] args)
@@ -26,13 +32,21 @@ public class KafkaProducerApplication implements CommandLineRunner {
 
      //   helloKafkaProducer.sendHello("Pramod:"+Math.random());
 
-        for(int i=0;i<10000;i++){
-            var key ="key-"+(i%4);
-            var data="data "+i+" with "+key;
-            kafkaKeyProducer.send(key,data);
-            Thread.sleep(1000);
+//        for(int i=0;i<10000;i++){
+//            var key ="key-"+(i%4);
+//            var data="data "+i+" with key "+key;
+//            kafkaKeyProducer.send(key,data);
+//            Thread.sleep(1000);
+
+         for(int i=0;i<5;i++){
+
+             var employee= new Employee(i,"Employee->"+i, LocalDate.now());
+             employeeJsonProducer.sendMessage(employee);
+
+         }
+
 
         }
 
     }
-}
+
