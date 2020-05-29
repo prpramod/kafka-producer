@@ -27,10 +27,10 @@ public class KafkaProducerApplication implements CommandLineRunner {
      //   helloKafkaProducer.sendHello("Pramod:"+Math.random());
 
         for(int i=0;i<10000;i++){
-            var key ="key-"+(i%5);
-            var data="data "+i+" with key "+key;
+            var key ="key-"+(i%4);
+            var data="data "+i+" with "+key;
             kafkaKeyProducer.send(key,data);
-            Thread.sleep(5000);
+            Thread.sleep(1000);
 
         }
 
