@@ -1,11 +1,20 @@
 package com.course.kafkaproducer.entity;
 
+import com.course.kafkaproducer.json.CustomLocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.time.LocalDate;
 
 public class Employee {
 
+    @JsonProperty("employee_id")
     private int employeeId;
     private String name;
+
+    @JsonProperty("birth_date")
+    @JsonSerialize(using = CustomLocalDateSerializer.class)
     private LocalDate birthDate;
 
     public Employee(int employeeId, String name, LocalDate birthDate) {
@@ -13,7 +22,7 @@ public class Employee {
         this.name = name;
         this.birthDate = birthDate;
     }
-
+    public Employee(){}
     public int getEmployeeId() {
         return employeeId;
     }
